@@ -4,7 +4,7 @@ import React from 'react'
 function Event() {
 
     function handleclick(){
-        console.log('Button Clicked');  
+        console.log('Button clicked');  
     }
   return (
      <div>
