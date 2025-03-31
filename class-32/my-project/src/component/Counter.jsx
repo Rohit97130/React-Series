@@ -10,8 +10,8 @@ function counter() {
     setCount(count+factor); 
  }
  function decrement(){
-    if(count===0){
-        setCount(count);
+    if(count-factor<0){
+        setCount(0);
     }
     else{
     setCount(count-factor);
@@ -27,7 +27,7 @@ function counter() {
         setFactor(factor);
     }
     else{
-    setCount(factor-1);
+    setFactor(factor-1);
     }
     
  }
