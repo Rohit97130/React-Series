@@ -6,7 +6,6 @@ function Form() {
     let handlefirst = (e)=>{
        setFirstName(e.target.value);
     //    console.log(e.target.value);
-       
     }
     let handlesecond = (e)=>{
        setLastName(e.target.value);

@@ -14,7 +14,7 @@ function Ue1() {
     // useEffect(()=>{
     //     console.log('Use Effect is there');   
     //     document.title = `This is a count ${Count}`
-    // }  it will run only at the time of component mounting as well as at the update of state
+    // }  it will run only at the time of component mounting as well as at                                                  the update of state
     // )
 
     useEffect(()=>{
@@ -38,7 +38,7 @@ function Ue1() {
         <h1>This is my count value: {Count}</h1>
         <button onClick={()=>SetCount(Count+1)}>Increment</button>
         <button onClick={()=>SetCount(Count-1)}>decrement</button>
-        <input onChange={handleValue} type="text" value={myvalue}/>
+        <input onChange={()=>handleValue} type="text" value={myvalue}/>
      
     </div>
   )
