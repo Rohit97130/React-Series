@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function WatchList({watchlist}) {
-  return (
+    const[searchvalue , Setsearchvalue] = useState('');
+   
+    
+    function handleSearch(e){
+       Setsearchvalue(e.target.value);
+    }
+
+  return ( 
     <> 
        {/* Genre field  */}
 
        {/* Search field  */}
       <div className='flex justify-center my-10'>
-         <input placeholder = 'Search Movie' className='bg-gray-200 h-[3rem] w-[18rem] px-4 border-1 outline-none' type="text" />
+         <input onChange={handleSearch} placeholder = 'Search Movie' className='bg-gray-200 h-[3rem] w-[18rem] px-4 border-1 outline-none' type="text" value={searchvalue} />
       </div>
 
       <div className='m-4 '>
@@ -23,7 +30,10 @@ function WatchList({watchlist}) {
           </thead>
 
           <tbody >
-             {watchlist.map((movieObj)=>{
+             {watchlist.filter((movieObj)=>( //incasse of circular bracket we do not need to writer return
+                movieObj.title.toLowerCase().includes(searchvalue.toLowerCase())
+             ))
+             .map((movieObj)=>{
                 return  <tr className='border-b-1 border-gray-200'>
                 <td className="flex items-center px-6 py-4" >
                   <img className='h-[6rem] w-[10rem] object-cover  rounded' src={`https://image.tmdb.org/t/p/original/${movieObj.poster_path}`}/>

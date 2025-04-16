@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Nav_bar from './component/Nav_bar';
 import Movies from './component/Movies';
 import WatchList from './component/WatchList';
@@ -14,12 +14,22 @@ function App() {
   const addToWatchList = (movieObj) => {
     const newWatchList = [...watchList, movieObj];
     setWatchList(newWatchList);
+    localStorage.setItem('movies' , JSON.stringify(newWatchList));
     console.log(newWatchList);
   };
 
-  const handleremove = ()=>{
-      
-  }
+  // const subToWatchList = (MovieObj)=>{
+  //      const newWatchList = watchList.filter(()=>{
+  //         return MovieObj.id !==watchList.id;
+  //      })
+  //      setWatchList(newWatchList);
+  // }
+
+  useEffect(()=>{
+    let localStoragedata = localStorage.getItem('movies');
+    if(!localStoragedata) return;
+    setWatchList(JSON.parse(localStoragedata));
+  },[])
 
   return (
     <>

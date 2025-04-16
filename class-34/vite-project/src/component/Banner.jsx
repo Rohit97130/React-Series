@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function Banner() {
    
@@ -19,15 +19,22 @@ function Banner() {
 {backdrop_path: '/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg',title: 'Avenger Endgame'}
   ]
   
-  const random = Math.floor(Math.random()*10);
-console.log(random);
+  const [index, setIndex] = useState(0);
+
+   useEffect(()=>{
+     const random = Math.floor(Math.random()*10);
+     setIndex(random);
+     console.log(random);
+   },[])
+
+
 
   return (
    
-        <div className='w-[100vw] h-[20vh] md:h-[80vh] bg-cover bg-center flex items-end' style={{backgroundImage:`url(https://image.tmdb.org/t/p/original/${backdropimage[random].backdrop_path})`
+        <div className='w-[100vw] h-[20vh] md:h-[80vh] bg-cover bg-center flex items-end' style={{backgroundImage:`url(https://image.tmdb.org/t/p/original/${backdropimage[index].backdrop_path})`
         }}>  
          {/* https://i.pinimg.com/originals/29/7d/e0/297de0761b0c756266d74ca50d03cc1d.jpg  ->Avenger */}
-            <div className='text-white w-full text-center text-xl'>{backdropimage[random].title}</div>
+            <div className='text-white w-full text-center text-xl'>{backdropimage[index].title}</div>
            
         </div>
        

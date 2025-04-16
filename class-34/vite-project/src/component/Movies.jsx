@@ -35,7 +35,7 @@ function Movies({addToWatchlist,watchList}) {
          <div className='flex justify-around flex-wrap gap-8 '>
 
           {Movies.map((MovieObject)=>{
-            return <Moviescard name={MovieObject.title} Posterpath={MovieObject.poster_path} addToWatchList ={addToWatchlist} MovieObj = {MovieObject} watchList={watchList} />
+            return <Moviescard name={MovieObject.title} Posterpath={MovieObject.poster_path} addToWatchList ={addToWatchlist} MovieObj = {MovieObject} watchList={watchList}/>
           })}
 
 
