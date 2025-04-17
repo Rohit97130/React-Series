@@ -1,16 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import genreData from '../utility/genre';
 
 function WatchList({watchlist}) {
     const[searchvalue , Setsearchvalue] = useState('');
-   
+    const[genreList, SetgenereList] = useState([]);
+    const[currentGenre , SetcurrentGenre] = useState('All Genres');
     
     function handleSearch(e){
        Setsearchvalue(e.target.value);
     }
 
+    const handleFilter = (genre)=>{
+       SetcurrentGenre(genre);
+    }
+    
+    useEffect(()=>{
+      let temp = watchlist.map((movieObj)=>{
+         return genreData[movieObj.genre_ids[0]];
+      })
+      console.log('mounted watchlist');
+      // console.log(temp);
+
+      temp = new Set(temp);
+      console.log(temp);
+      
+      SetgenereList(['All Genres' , ...temp]);
+    },[watchlist])
+
   return ( 
     <> 
-       {/* Genre field  */}
+       {/* Genre  based filter  */}
+
+       <div className='flex justify-center '>
+           {genreList.map((genre)=>{
+              return <div onClick={()=>{handleFilter(genre)}} className= { currentGenre===genre?'flex justify-center text-white font-bold items-center h-[3rem] w-[9rem] bg-blue-500 rounded-xl m-4':'flex justify-center text-white font-bold items-center h-[3rem] w-[9rem] bg-gray-500 rounded-xl m-4'}>{genre}</div>
+           })}
+           
+       </div>
 
        {/* Search field  */}
       <div className='flex justify-center my-10'>
@@ -30,7 +56,15 @@ function WatchList({watchlist}) {
           </thead>
 
           <tbody >
-             {watchlist.filter((movieObj)=>( //incasse of circular bracket we do not need to writer return
+             {watchlist.filter((movieObj)=>{
+               if(currentGenre=== 'All Genres'){
+                  return true;
+               }
+                else{
+                return genreData[movieObj.genre_ids[0]]===currentGenre;
+                }
+})
+             .filter((movieObj)=>( //incasse of circular bracket we do not need to writer return
                 movieObj.title.toLowerCase().includes(searchvalue.toLowerCase())
              ))
              .map((movieObj)=>{
@@ -41,7 +75,8 @@ function WatchList({watchlist}) {
                 </td>
                 <td>{movieObj.vote_average}</td>
                 <td>{movieObj.popularity}</td>
-                <td>Rating</td>
+                <td>{genreData[movieObj.genre_ids[0]]
+                }</td>
  
                 <td className='text-red-500'>Delete</td>
               </tr>

@@ -15,7 +15,9 @@ function App() {
     const newWatchList = [...watchList, movieObj];
     setWatchList(newWatchList);
     localStorage.setItem('movies' , JSON.stringify(newWatchList));
-    console.log(newWatchList);
+    // console.log(newWatchList);
+    console.log('addtowatchlist');
+    
   };
 
   // const subToWatchList = (MovieObj)=>{
@@ -27,9 +29,11 @@ function App() {
 
   useEffect(()=>{
     let localStoragedata = localStorage.getItem('movies');
+    console.log('mounted1');
+    
     if(!localStoragedata) return;
     setWatchList(JSON.parse(localStoragedata));
-  },[])
+  },[]);
 
   return (
     <>
