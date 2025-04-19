@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import genreData from '../utility/genre';
 
-function WatchList({watchlist}) {
+function WatchList({watchlist,setWatchList,handledelete}) {
     const[searchvalue , Setsearchvalue] = useState('');
     const[genreList, SetgenereList] = useState([]);
     const[currentGenre , SetcurrentGenre] = useState('All Genres');
@@ -14,6 +14,40 @@ function WatchList({watchlist}) {
        SetcurrentGenre(genre);
     }
     
+    const handleascending = (()=>{
+        let sortedAscending = watchlist.sort((movieObjA , movieObjB)=>{
+           return movieObjA.vote_average-movieObjB.vote_average
+        })
+        setWatchList([...sortedAscending]);
+    })
+    const handledecending = (()=>{
+        let sorted_descending = watchlist.sort((movieObjA , movieObjB)=>{
+           return movieObjB.vote_average-movieObjA.vote_average
+        })
+        setWatchList([...sorted_descending]);
+    })
+
+    const handle_decending_popularity =(()=>{
+      let sorted_descending = watchlist.sort((movieObjA , movieObjB)=>{
+         return movieObjB.popularity-movieObjA.popularity
+      })
+      setWatchList([...sorted_descending]);
+  })
+
+  const handle_ascending_popularity =(()=>{
+   let sorted_ascending = watchlist.sort((movieObjA , movieObjB)=>{
+      return movieObjA.
+      popularity-movieObjB.popularity
+   })
+   setWatchList([...sorted_ascending]);
+})
+
+
+
+
+
+   
+
     useEffect(()=>{
       let temp = watchlist.map((movieObj)=>{
          return genreData[movieObj.genre_ids[0]];
@@ -24,7 +58,7 @@ function WatchList({watchlist}) {
       temp = new Set(temp);
       console.log(temp);
       
-      SetgenereList(['All Genres' , ...temp]);
+      SetgenereList(['All Genres',...temp]);
     },[watchlist])
 
   return ( 
@@ -48,8 +82,8 @@ function WatchList({watchlist}) {
           <thead className=' border border-gray-200 bg-gray-200'>
           <tr>
              <th>Name</th>
-             <th>Rating</th>
-             <th>Popularity</th>
+             <th><i onClick={handledecending} class="fa-solid fa-arrow-up"></i> Rating <i onClick={handleascending} class="fa-solid fa-arrow-down"></i></th>
+             <th><i onClick={handle_decending_popularity} class="fa-solid fa-arrow-up"></i> Popularity  <i onClick={handle_ascending_popularity} class="fa-solid fa-arrow-down"></i></th>
              <th>Genre</th>
              <th></th>
            </tr>
@@ -78,7 +112,7 @@ function WatchList({watchlist}) {
                 <td>{genreData[movieObj.genre_ids[0]]
                 }</td>
  
-                <td className='text-red-500'>Delete</td>
+                <td onClick={()=>{handledelete(movieObj)}} className='text-red-500 cursor-pointer'>Delete</td>
               </tr>
              })}
 
