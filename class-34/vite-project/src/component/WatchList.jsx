@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import genreData from '../utility/genre';
 
-function WatchList({watchlist,setWatchList,handledelete}) {
+import { useContext } from 'react';
+import { Moviecontext } from './moviecontext';
+
+function WatchList() {
+  
+   const{watchList,setWatchList,handledelete} = useContext(Moviecontext)
+ 
+
+
+
     const[searchvalue , Setsearchvalue] = useState('');
     const[genreList, SetgenereList] = useState([]);
     const[currentGenre , SetcurrentGenre] = useState('All Genres');
@@ -15,27 +24,27 @@ function WatchList({watchlist,setWatchList,handledelete}) {
     }
     
     const handleascending = (()=>{
-        let sortedAscending = watchlist.sort((movieObjA , movieObjB)=>{
+        let sortedAscending = watchList.sort((movieObjA , movieObjB)=>{
            return movieObjA.vote_average-movieObjB.vote_average
         })
         setWatchList([...sortedAscending]);
     })
     const handledecending = (()=>{
-        let sorted_descending = watchlist.sort((movieObjA , movieObjB)=>{
+        let sorted_descending = watchList.sort((movieObjA , movieObjB)=>{
            return movieObjB.vote_average-movieObjA.vote_average
         })
         setWatchList([...sorted_descending]);
     })
 
     const handle_decending_popularity =(()=>{
-      let sorted_descending = watchlist.sort((movieObjA , movieObjB)=>{
+      let sorted_descending = watchList.sort((movieObjA , movieObjB)=>{
          return movieObjB.popularity-movieObjA.popularity
       })
       setWatchList([...sorted_descending]);
   })
 
   const handle_ascending_popularity =(()=>{
-   let sorted_ascending = watchlist.sort((movieObjA , movieObjB)=>{
+   let sorted_ascending = watchList.sort((movieObjA , movieObjB)=>{
       return movieObjA.
       popularity-movieObjB.popularity
    })
@@ -46,10 +55,11 @@ function WatchList({watchlist,setWatchList,handledelete}) {
 
 
 
+
    
 
     useEffect(()=>{
-      let temp = watchlist.map((movieObj)=>{
+      let temp = watchList.map((movieObj)=>{
          return genreData[movieObj.genre_ids[0]];
       })
       console.log('mounted watchlist');
@@ -59,7 +69,7 @@ function WatchList({watchlist,setWatchList,handledelete}) {
       console.log(temp);
       
       SetgenereList(['All Genres',...temp]);
-    },[watchlist])
+    },[watchList])
 
   return ( 
     <> 
@@ -90,7 +100,7 @@ function WatchList({watchlist,setWatchList,handledelete}) {
           </thead>
 
           <tbody >
-             {watchlist.filter((movieObj)=>{
+             {watchList.filter((movieObj)=>{
                if(currentGenre=== 'All Genres'){
                   return true;
                }

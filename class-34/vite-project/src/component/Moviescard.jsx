@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react'
 
+import { useContext } from 'react';
+import { Moviecontext } from './moviecontext';
 
-function Moviescard({name , Posterpath,addToWatchList, MovieObj, watchList}) {
+
+function Moviescard({name , Posterpath, MovieObj}) {
   
+    let myContext = useContext(Moviecontext)
+
+
+
     function doesContain(){
-    for(let i=0;i<watchList.length;i++){
-         if(watchList[i].id === MovieObj.id){
+    for(let i=0;i<myContext.watchList.length;i++){
+         if(myContext.watchList[i].id === MovieObj.id){
             return true;//change the button to cross
          }
       }
@@ -21,7 +28,7 @@ function Moviescard({name , Posterpath,addToWatchList, MovieObj, watchList}) {
                </div>
          ):(
           <div onClick={()=>{
-            addToWatchList(MovieObj)
+            myContext.addToWatchList(MovieObj)
            }} className='cursor-pointer mr-1 mt-2 p-1 bg-black/50 rounded'>
             &#128525; 
            </div>
