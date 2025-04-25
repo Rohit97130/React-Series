@@ -12,9 +12,9 @@ const store = createStore(reducer)  //3 set the reducer to the store
 
 
 //2 create Reducer
-function reducer(state = {amount:1000}, action){
+function reducer(state = {amount:1000, name:'rohit'}, action){
      if(action.type === deposit){  //why using variable just to avoid mistake of spelling
-          return {amount: state.amount + action.payload};
+          return {amount: state.amount + action.payload, name:state.name};
      }
      if(action.type === withdraw){
           return {amount: state.amount - action.payload};
