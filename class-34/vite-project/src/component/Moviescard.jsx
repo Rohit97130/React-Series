@@ -7,8 +7,8 @@ import { Moviecontext } from './moviecontext';
 function Moviescard({name , Posterpath, MovieObj}) {
   
     let myContext = useContext(Moviecontext)
-
-
+    
+    
 
     function doesContain(){
     for(let i=0;i<myContext.watchList.length;i++){
@@ -23,7 +23,7 @@ function Moviescard({name , Posterpath, MovieObj}) {
     <div className='h-[40vh] w-[150px]  bg-center bg-cover flex flex-col justify-between items-end rounded-lg hover:scale-110 duration-300' style={{backgroundImage:`url(https://image.tmdb.org/t/p/original/${Posterpath})`}}>
          
          {doesContain()?(
-               <div className='cursor-pointer mr-1 mt-2 p-1 bg-black/50 rounded'>
+               <div onClick={()=>{myContext.handledelete(MovieObj)}} className='cursor-pointer mr-1 mt-2 p-1 bg-black/50 rounded'>
                 &#10060; 
                </div>
          ):(
