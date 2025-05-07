@@ -1,0 +1,18 @@
+body{
+    background-color: #282c34;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    text-align: center;
+    
+}
+
+#root{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    align-items: center;
+    
+}
