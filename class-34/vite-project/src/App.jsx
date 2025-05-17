@@ -5,6 +5,8 @@ import WatchList from './component/WatchList';
 import Banner from './component/Banner';
 import Pagination from './component/Pagination';
 
+import Details from './component/Details';
+
 import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import { Moviecontext } from './component/moviecontext';
 
@@ -19,7 +21,6 @@ function App() {
     localStorage.setItem('movies' , JSON.stringify(newWatchList));
     // console.log(newWatchList);
     console.log('addtowatchlist');
-    
   };
 
   const handledelete = (movieObj)=>{
@@ -54,6 +55,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <> <Banner/>  <Movies  /> </>} />
         <Route path="/watchList" element={<WatchList />} />
+        <Route path="/details/:id"  element={<Details/>}/>
       </Routes> 
      
     </Moviecontext.Provider>
